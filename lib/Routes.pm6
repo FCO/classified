@@ -16,11 +16,6 @@ model Session is table<logged_user> {
 
 sub routes() is export {
     route {
-        my $*RED-DB = database "SQLite", :database<./test.db>;
-
-        User.^create-table: :if-not-exists;
-        Session.^create-table: :if-not-exists;
-
         before Cro::HTTP::Session::Red[Session].new;
         get -> {
             content 'text/html', "<h1> \$session.gist() </h1>";
