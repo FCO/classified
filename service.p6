@@ -3,11 +3,12 @@ use Cro::HTTP::Server;
 use Routes;
 use Red;
 
-my $*RED-DB = database "SQLite", :database<./test.db>;
+PROCESS::<$*RED-DB> = database "SQLite", :database<./test.db>;
 
 User.^create-table: :if-not-exists;
 Session.^create-table: :if-not-exists;
 
+try User.^create: :name<CookieMonster>, :email<cookie@monster.com>, :password("1234");
 
 my Cro::Service $http = Cro::HTTP::Server.new(
     http => <1.1>,
