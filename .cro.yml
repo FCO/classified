@@ -1,0 +1,15 @@
+---
+id: classified
+links:  []
+name: classified
+cro: 1
+entrypoint: service.p6
+env:  []
+endpoints: 
+  - 
+    port-env: CLASSIFIED_PORT
+    name: HTTP
+    protocol: http
+    id: http
+    host-env: CLASSIFIED_HOST
+...
