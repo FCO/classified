@@ -3,10 +3,10 @@ use Cro::HTTP::Server;
 use Routes;
 use Red;
 
-PROCESS::<$*RED-DB> = database "SQLite", :database<./test.db>;
+GLOBAL::<$RED-DB> = database "SQLite", :database</Users/fernando/test.db>;
 
 User.^create-table: :if-not-exists;
-Session.^create-table: :if-not-exists;
+UserSession.^create-table: :if-not-exists;
 
 try User.^create: :name<CookieMonster>, :email<cookie@monster.com>, :password("1234");
 
