@@ -3,7 +3,7 @@ use Cro::HTTP::Server;
 use Routes;
 use Red;
 
-$GLOBAL::RED-DB = database "SQLite", :database("{%*ENV{HOME}}/test.db");
+$GLOBAL::RED-DB = database "SQLite", :database("{%*ENV<HOME>}/test.db");
 
 User.^create-table: :if-not-exists;
 UserSession.^create-table: :if-not-exists;

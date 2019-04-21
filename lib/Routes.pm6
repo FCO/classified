@@ -14,15 +14,15 @@ model User is table<account> {
 }
 
 model UserSession is table<logged_user> does Cro::HTTP::Auth {
-    has Str  $.id   is id;
+    has Str  $.id   is column{ :id, :nullable };
     has UInt $.uid  is referencing{ User.id };
-    has User $.user is relationship{ .uid };
+    has User $.user is relationship{ .uid } is rw;
 }
 
 sub routes() is export {
 	say "routes";
     route {
-        before Cro::HTTP::Session::Red[UserSession].new;
+        before Cro::HTTP::Session::Red[UserSession].new: cookie-name => 'MY_SESSION_COOKIE_NAME';
         get -> UserSession $session {
             content 'text/html', "<h1> AQUI: $session.user.name() </h1>";
         }
@@ -46,7 +46,7 @@ sub routes() is export {
             request-body -> (Str() :$email, Str() :$password, *%) {
                 my $user = User.^load: :$email;
                 if $user.?check-password: $password {
-                    $session.user = $_;
+                    $session.user = $user;
                     $session.^save;
                     redirect '/', :see-other;
                 }
