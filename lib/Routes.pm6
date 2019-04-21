@@ -14,12 +14,13 @@ model User is table<account> {
 }
 
 model UserSession is table<logged_user> does Cro::HTTP::Auth {
-    has UInt $.id   is serial;
+    has Str  $.id   is id;
     has UInt $.uid  is referencing{ User.id };
     has User $.user is relationship{ .uid };
 }
 
 sub routes() is export {
+	say "routes";
     route {
         before Cro::HTTP::Session::Red[UserSession].new;
         get -> UserSession $session {
@@ -40,9 +41,8 @@ sub routes() is export {
             HTML
         }
 
-        #post -> UserSession $session, 'login' {
         post -> UserSession $session, 'login' {
-            dd $session;
+        #post -> 'login' {
             request-body -> (Str() :$email, Str() :$password, *%) {
                 my $user = User.^load: :$email;
                 if $user.?check-password: $password {
