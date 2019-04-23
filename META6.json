@@ -1,34 +1,28 @@
 {
-  "resources": [
-    
-  ],
-  "license": "Write me!",
-  "perl": "6.*",
-  "authors": [
+  "auth" : "Write me!",
+  "authors" : [
     ""
   ],
-  "test-depends": [
-    
-  ],
-  "source-url": "Write me!",
-  "auth": "Write me!",
-  "depends": [
+  "build-depends" : [ ],
+  "depends" : [
     "Cro::HTTP"
   ],
-  "description": "Write me!",
-  "name": "classified",
-  "build-depends": [
-    
-  ],
-  "version": "0.0.1",
-  "support": {
-    "source": "Write me!"
+  "description" : "Write me!",
+  "license" : "Write me!",
+  "meta-version" : "0",
+  "name" : "Routes",
+  "perl" : "6.*",
+  "provides" : {
+    "Routes" : "lib/Routes.pm6"
   },
-  "provides": {
-    "Routes.pm6": "lib/Routes.pm6"
+  "resources" : [ ],
+  "source-url" : "Write me!",
+  "support" : {
+    "source" : "Write me!"
   },
-  "meta-version": "0",
-  "tags": [
+  "tags" : [
     ""
-  ]
+  ],
+  "test-depends" : [ ],
+  "version" : "0.0.1"
 }
