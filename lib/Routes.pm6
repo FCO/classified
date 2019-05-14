@@ -25,8 +25,8 @@ model UserSession is table<logged_user> does Cro::HTTP::Auth {
 sub routes() is export {
     route {
         before Cro::HTTP::Session::Red[UserSession].new: cookie-name => 'MY_SESSION_COOKIE_NAME';
-        get -> UserSession $session {
-            content 'text/html', "<h1> Logged User: $session.user.name() </h1>";
+        get -> UserSession $session (User:D :$user, |) {
+            content 'text/html', "<h1> Logged User: $user.name() </h1>";
         }
 
         get -> 'login' {
